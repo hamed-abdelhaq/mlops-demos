@@ -5,7 +5,7 @@ Experiment tracking (ET) is the process of keeping track of all the relevant inf
 * Environemtn
 * Data
 * Hyperparameters
-* Metrics
+* Metrics 
 * ...
 
 _Relevant information_ may vary depending on the nature of the experiment: you may be experimenting with different data sources, or perhaps tuning the hyperparameters, or any other kind of experiment with different kinds of results to track.
