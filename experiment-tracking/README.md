@@ -142,4 +142,4 @@ After running your code, you can use the web UI to inspect your experiment and i
 
 So far we've seen _Experiment Tracking_, which handles model architecture, training and evaluation. ***Model Management*** would be the next step in MLops and handles model versioning and deployment, as well as hardware scaling. In this block we will see how to use MLflow for Model Management.
 
-![Source: https://neptune.ai/blog/mlops](https://i0.wp.com/neptune.ai/wp-content/uploads/MLOps_cycle.jpg?resize=1024%2C576&ssl=1)
+![Source: https://neptune.ai/blog/mlops](images/MLOps_cycle.webp)
