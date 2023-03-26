@@ -17,7 +17,7 @@ There are 3 main reasons for tracking experiments:
 * ***Optimization***: With the use of experiment tracking tools, we can develop more effective workflows and automate certain steps that are typically carried out manually.
 
 
-## Using Spreadsheets to document experements
+## Using Spreadsheets to document experiments
 This approach falls short for any reasonably complex project:
 
 * Prone to errors: Manually copying and pasting results is inconvenient and likely to result in mistakes in the long run. Even if you automate data input, problems may arise later on.
@@ -28,7 +28,7 @@ This approach falls short for any reasonably complex project:
 
 ## Introduction to MLflow
 
-***[MLflow](https://mlflow.org/)*** is an open source platform (as Python package) for the machine learning lifecycle (building and maintaing ML models).
+***[MLflow](https://mlflow.org/)*** is an open source platform (as Python package) for the machine learning lifecycle (building and maintaining ML models).
 
 It encompasses 4 main modules:
 * ***[Tracking](https://mlflow.org/docs/latest/tracking.html)***: It is our focus in this module, a.k.a, ET
@@ -70,7 +70,7 @@ Issues that might emerge when installing MLflow under windows:
 
 
 Once you've installed MLflow, You may access the MLflow web UI by running the `mlflow ui` command from a terminal. 
-However, you will need to provide a backend in order to save and retrieve experiment data. SQLite can be utlilized as a backend with the following command:
+However, you will need to provide a backend in order to save and retrieve experiment data. SQLite can be utilized as a backend with the following command:
 
 ```
 mlflow ui --backend-store-uri sqlite:///project-experiments.db
@@ -106,7 +106,7 @@ mlflow.set_experiment("text-classification")
 
    * When you run this cell, if the experiment did not exist before, MLflow will create it.
 
-Write and run your code to load and prepare any data you may need noramlly. Then, once you're ready to fit a model, use a `with` statement block to wrap your code like this:
+Write and run your code to load and prepare any data you may need normally. Then, once you're ready to fit a model, use a `with` statement block to wrap your code like this:
 
 ```python
 #wrap your code with this
@@ -151,7 +151,7 @@ So far we've seen _Experiment Tracking_, which handles model architecture, train
 you could simply use a folder hierarchy for model management. However, this simple management approach is not practical and has many limitations
 * ***Error prone***: manually renaming folders and files and moving them around will surely result in mistakes.
 * ***No versioning***: manual versioning by choosing filenames also leads to many mistakes and it is very easy to mix things up.
-* ***No model lineage***: iit is difficult to keep track how the models are created, what the hyperparams were, etc.
+* ***No model lineage***: iit is difficult to keep track how the models are created, what the hyperparameters were, etc.
 
 Let's see how MLflow helps in tracking models and artifacts
 
