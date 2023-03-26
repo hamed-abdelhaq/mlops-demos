@@ -143,3 +143,99 @@ After running your code, you can use the web UI to inspect your experiment and i
 So far we've seen _Experiment Tracking_, which handles model architecture, training and evaluation. ***Model Management*** would be the next step in MLops and handles model versioning and deployment, as well as hardware scaling. In this block we will see how to use MLflow for Model Management.
 
 ![Source: https://neptune.ai/blog/mlops](images/MLOps_cycle.webp)
+
+
+
+## Model tracking
+
+you could simply use a folder hierarchy for model management. However, this simple management approach is not practical and has many limitations
+* ***Error prone***: manually renaming folders and files and moving them around will surely result in mistakes.
+* ***No versioning***: manual versioning by choosing filenames also leads to many mistakes and it is very easy to mix things up.
+* ***No model lineage***: iit is difficult to keep track how the models are created, what the hyperparams were, etc.
+
+Let's see how MLflow helps in tracking models and artifacts
+
+## Tracking artifacts
+
+Besides parameters and metrics, MLflow can also track ***artifacts***, such as our model weights.
+
+Tracking an artifact is just like tracking any other element in MLflow. The simplest way of model management is simply to track the model as an artifact. Here's the same Scikit-Learn code we saw before with a new line at the end:
+
+```python
+import pickle
+# model tracking by maintaining artifacts
+with mlflow.start_run():
+    
+    mlflow.set_tag("developer", "hamed")
+    # Compute predicted probabilities
+    alpha = 3
+    mlflow.log_param("alpha", alpha)
+
+    nb_model = MultinomialNB(alpha=alpha)
+    nb_model.fit(X_train_tfidf, y_train)
+
+    pickle.dump(nb_model, open('models/model.pkl', 'wb'))
+
+    mlflow.log_artifact(local_path='models/model.pkl', artifact_path='models_pickles')
+
+    probs = nb_model.predict_proba(X_val_tfidf)
+
+    # Evaluate the classifier
+    auc, accuracy = evaluate_roc(probs, y_val)
+    mlflow.log_metric("auc", auc)
+    mlflow.log_metric("accuracy", accuracy)
+```
+
+* `mlflow.log_artifact()` logs a local file or directory as an artifact.
+  * `local_path` is the path of the file on disk.
+  * `artifact_path` is the directory in `artifact_uri` to write to under mlflow.
+
+
+## Model logging
+
+The drawback of using artifact tracking for managing models is that it can be tedious task to locate a particular model, download the binary file, and develop the code to load it and perform predictions.
+
+There's a better way of managing models. We'll use the sklearn code from before as an example; pay attention to the last line:
+
+```python
+import pickle
+# # model tracking by logging model data and metadata
+with mlflow.start_run():
+    
+    mlflow.set_tag("developer", "hamed")
+    # Compute predicted probabilities
+    alpha = 3
+    mlflow.log_param("alpha", alpha)
+
+    nb_model = MultinomialNB(alpha=alpha)
+    nb_model.fit(X_train_tfidf, y_train)
+
+    pickle.dump(nb_model, open('models/model.pkl', 'wb'))
+
+    mlflow.sklearn.log_model(nb_model, 'models_pickles')
+
+    probs = nb_model.predict_proba(X_val_tfidf)
+
+    # Evaluate the classifier
+    auc, accuracy = evaluate_roc(probs, y_val)
+    mlflow.log_metric("auc", auc)
+    mlflow.log_metric("accuracy", accuracy)
+```
+
+## Making predictions
+
+Models logged using `log_model` function allows for generating code snippets next to the model artifacts to facilitate the process of making predictions with the logged models.
+
+MLflow actually stores the model in a format that allows us to load it in different "flavors". For example, our  model can be loaded as an sklearn model or as a PyFuncModel.
+
+![](images/log_model.png)
+
+
+
+logged_model = 'runs:/248549b6bfe24e10bc8c82d8a703704b/models_pickles'
+
+```python
+# Load model as a PyFuncModel.
+loaded_model = mlflow.pyfunc.load_model(logged_model)
+loaded_model
+```
