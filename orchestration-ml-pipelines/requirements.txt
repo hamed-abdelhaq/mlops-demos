@@ -1,0 +1,7 @@
+nltk
+mlflow
+jupyter
+scikit-learn
+pandas
+seaborn
+prefect==2.8.5
