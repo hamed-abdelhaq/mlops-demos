@@ -22,7 +22,8 @@ and processing of the data.
 + Timeouts
 
 ```
-Prefect workflow orchestration framework was built with the mission of reducing the impact of negative engineering by redcuing the time spent on that from 90% to 20%,
+Prefect workflow orchestration framework was built with the mission of reducing the impact of negative engineering by 
+reducing the time spent on that from 90% to 20%,
 allowing data scientists to focus on improving the model and its performance.
 ```
 
