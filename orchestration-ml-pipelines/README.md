@@ -1,6 +1,6 @@
 # Workflow Orchestration
 
-It's a set of facilities/tools that schedule a number of steps/stages to accomplish, e.g.,  Scheduling ML models training
+It's a set of facilities/tools that schedule a number of steps/stages to be accomplished, e.g.,  Scheduling ML models training
 
 Exmaple pipeline: 
 ```
@@ -36,8 +36,7 @@ Open Source Workflow Orchestration Framework for eliminating Negative Engineerin
 + Very active Community  (> 10k Github star)
 + Prefect Cloud/Prefect Server
 
-Prefect Orion (aka Prefect 2.0) has a substantial improvement over Prefect 1.0 to support the dynamic and scalable workloads  of the modern data stack,
-in particular when applied on the DAC pipeline architecture.
+Prefect Orion (aka Prefect 2.0) has a substantial improvement over Prefect 1.0 to support the dynamic and scalable workloads  of the modern data stack.
 
 
 With the help of its new asynchronous engine, Prefect offers a simple approach to convert any function into a unit of work that can be monitored and managed through orchestration regulations.
